@@ -1,8 +1,12 @@
 public class Simulation {
 
+    int NumberOfObjects;
+
+
     public static void main(String[] args) {
-        //TODO: please use this class to run your simulation
+
+
+
 
     }
-
 }
