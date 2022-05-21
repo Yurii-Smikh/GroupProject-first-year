@@ -16,7 +16,6 @@ public class SingleBodyNode extends BodyNode{
 
     @Override
     public BodyNode add(SingleBodyNode body) {
-        //TODO
-        return null;
+        return new MultipleBodyNode(this, body);
     }
 }

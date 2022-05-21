@@ -1,8 +1,10 @@
 package Octree;
 
-import Simulation.Body;
-
 public class EmptyBodyNode extends BodyNode{
+    public EmptyBodyNode(){
+
+    }
+
     @Override
     public int size() {
         return 0;
