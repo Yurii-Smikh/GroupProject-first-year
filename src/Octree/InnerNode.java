@@ -21,7 +21,7 @@ public class InnerNode extends OctreeNode {
     public InnerNode(){
         leafNodes = new OctreeNode[2][2][2];
 
-        leafNodes[0][1][0] = new BlankNode(IntVector(), size/2);
+        leafNodes[0][1][0] = new BlankNode(new IntVector(position.getX() - , ), size/2);
         leafNodes[0][1][1] = new BlankNode(, size/2);
         leafNodes[0][0][0] = new BlankNode(, size/2);
         leafNodes[0][0][1] = new BlankNode(, size/2);
