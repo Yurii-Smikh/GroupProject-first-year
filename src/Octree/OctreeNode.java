@@ -2,6 +2,7 @@ package Octree;
 
 import Models.Body;
 import Models.Vector3;
+import codedraw.CodeDraw;
 
 public abstract class OctreeNode {
     protected Vector3 massCenter;  // center of mass of all the bodies inside the node
@@ -28,7 +29,7 @@ public abstract class OctreeNode {
     public abstract int bodyCount();
     public abstract OctreeNode add(Body body);
 
-    public abstract void draw();
+    public abstract void draw(CodeDraw cd);
 }
 
 

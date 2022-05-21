@@ -1,7 +1,6 @@
 package Models;
 
 import codedraw.CodeDraw;
-
 public class Body {
     private double mass;
     private Vector3 position;

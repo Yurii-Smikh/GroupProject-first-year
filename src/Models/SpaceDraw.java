@@ -1,12 +1,18 @@
-import java.awt.*;
+package Models;
 
+import java.awt.*;
 public class SpaceDraw {
+
+    public static final double SUN_MASS = 1.989e30; // kilograms
+    public static final double SUN_RADIUS = 696340e3; // meters
+
 
     // Returns the approximate radius of a celestial body with the specified mass.
     // (It is assumed that the radius r is related to the mass m of the body by r = m ^ 0.5,
     // where m and r measured in solar units.)
     public static double massToRadius(double mass) {
-        return Simulation.SUN_RADIUS * (Math.pow(mass / Simulation.SUN_MASS, 0.5));
+
+        return SUN_RADIUS * (Math.pow(mass / SUN_MASS, 0.5));
     }
 
     // Returns the approximate color of a celestial body with the specified mass. The color of
@@ -14,12 +20,12 @@ public class SpaceDraw {
     // temperature of a main sequence star.
     public static Color massToColor(double mass) {
         Color color;
-        if (mass < Simulation.SUN_MASS / 10) {
+        if (mass < SUN_MASS / 10) {
             // not a star-like body below this mass
             color = Color.LIGHT_GRAY;
         } else {
             // assume a main sequence star
-            color = SpaceDraw.kelvinToColor((int) (5500 * mass / Simulation.SUN_MASS));
+            color = SpaceDraw.kelvinToColor((int) (5500 * mass / SUN_MASS));
         }
 
         return color;
@@ -51,4 +57,3 @@ public class SpaceDraw {
         else return (int) color;
     }
 }
-
