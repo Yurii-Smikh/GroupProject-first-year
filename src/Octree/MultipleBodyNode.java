@@ -6,6 +6,7 @@ public class MultipleBodyNode extends BodyNode{
     private BodyNode[] leafNodes;
 
     public MultipleBodyNode(SingleBodyNode... nodes){
+        leafNodes = new BodyNode[8];
         for (BodyNode node : leafNodes) {
             node = new EmptyBodyNode();
         }

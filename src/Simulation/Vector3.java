@@ -34,7 +34,7 @@ public class Vector3 {
     }
 
     public Vector3 subtract(Vector3 vector3){
-        return add(vector3);
+        return add(vector3.multiply(-1));
     }
 
     public Vector3 multiply(double factor){

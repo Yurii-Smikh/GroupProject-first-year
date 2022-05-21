@@ -12,7 +12,6 @@ public class EmptyBodyNode extends BodyNode{
 
     @Override
     public BodyNode add(SingleBodyNode body) {
-        //TODO
-        return null;
+        return body;
     }
 }
