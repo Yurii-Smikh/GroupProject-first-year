@@ -2,8 +2,6 @@ package Octree;
 
 import Models.*;
 
-import java.sql.Array;
-
 public class InnerNode extends OctreeNode {
     private OctreeNode[][][] leafNodes;
 
@@ -18,49 +16,67 @@ public class InnerNode extends OctreeNode {
     // RightBotFront [1][0][0]
     // RightBotBack [1][0][1]
 
-    public InnerNode(){
+    public InnerNode(BodyNode previoisNodeFromWichToCreate, Body body){
+        this.position = previoisNodeFromWichToCreate.getPosition();
+        this.size = previoisNodeFromWichToCreate.getSize();
+
         leafNodes = new OctreeNode[2][2][2];
 
-        leafNodes[0][1][0] = new BlankNode(new IntVector(position.getX() - , ), size/2);
-        leafNodes[0][1][1] = new BlankNode(, size/2);
-        leafNodes[0][0][0] = new BlankNode(, size/2);
-        leafNodes[0][0][1] = new BlankNode(, size/2);
+        double newSize = size * 0.5;
+        fillWithBlanks(newSize);
 
-        leafNodes[1][1][0] = new BlankNode(,size/2);
-        leafNodes[1][1][1] = new BlankNode(,size/2);
-        leafNodes[1][0][0] = new BlankNode(,size/2);
-        leafNodes[1][0][1] = new BlankNode(,size/2);
+        add(body);
+        add(previoisNodeFromWichToCreate.getBody());
     }
 
-    private OctreeNode pickNodefor(Body body) {
+    private IntVector pickNodefor(Body body) {
         Vector3 pos = body.getPosition();
         IntVector indices = new IntVector(0, 0, 0);
 
-        if (pos.getX() > position.getX()) { // right
+        if (pos.getX() >= position.getX()) { // right
             indices.setX(1);
         }
-        if (pos.getY() > position.getY()) { // top
+        if (pos.getY() >= position.getY()) { // top
             indices.setY(1);
         }
-        if (pos.getZ() > position.getZ()){ // back
+        if (pos.getZ() >= position.getZ()){ // back
             indices.setZ(1);
         }
-        return leafNodes[indices.getX()][indices.getY()][indices.getZ()];
+        return indices;
     }
+    private void fillWithBlanks(double newSize){
+        leafNodes[0][1][0] = new BlankNode(new Vector3(position.getX() - newSize, position.getY() + newSize, position.getZ() + newSize), newSize);
+        leafNodes[0][1][1] = new BlankNode(new Vector3(position.getX() - newSize, position.getY() + newSize, position.getZ() - newSize), newSize);
+        leafNodes[0][0][0] = new BlankNode(new Vector3(position.getX() - newSize, position.getY() - newSize, position.getZ() + newSize), newSize);
+        leafNodes[0][0][1] = new BlankNode(new Vector3(position.getX() - newSize, position.getY() - newSize, position.getZ() - newSize), newSize);
 
+        leafNodes[1][1][0] = new BlankNode(new Vector3(position.getX() + newSize, position.getY() + newSize, position.getZ() + newSize),newSize);
+        leafNodes[1][1][1] = new BlankNode(new Vector3(position.getX() + newSize, position.getY() + newSize, position.getZ() - newSize),newSize);
+        leafNodes[1][0][0] = new BlankNode(new Vector3(position.getX() + newSize, position.getY() - newSize, position.getZ() + newSize),newSize);
+        leafNodes[1][0][1] = new BlankNode(new Vector3(position.getX() + newSize, position.getY() - newSize, position.getZ() - newSize),newSize);
+    }
     @Override
     public int bodyCount() {
         int sum = 0;
-        for (OctreeNode node :
-                leafNodes) {
-            sum += node.bodyCount();
-        }
+        //TODO
         return sum;
     }
 
     @Override
-    public OctreeNode add(BodyNode node){
-        //TODO actually add it
+    public OctreeNode add(Body body){
+        IntVector choice = pickNodefor(body);
+        leafNodes[choice.getX()][choice.getY()][choice.getZ()] = leafNodes[choice.getX()][choice.getY()][choice.getZ()].add(body);
         return this;
+    }
+
+    @Override
+    public void draw() {
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                for (int k = 0; k < 2; k++) {
+                    leafNodes[i][j][k].draw();
+                }
+            }
+        }
     }
 }

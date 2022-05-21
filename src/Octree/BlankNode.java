@@ -1,10 +1,10 @@
 package Octree;
 
 import Models.Body;
-import Models.IntVector;
+import Models.Vector3;
 
 public class BlankNode extends OctreeNode {
-    public BlankNode(IntVector position, int size){
+    public BlankNode(Vector3 position, double size){
         this.position = position;
         this.size = size;
     }
@@ -18,4 +18,7 @@ public class BlankNode extends OctreeNode {
     public OctreeNode add(Body body) {
         return new BodyNode(body, getPosition(), getSize());
     }
+
+    @Override
+    public void draw() {}
 }

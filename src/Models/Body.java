@@ -1,5 +1,7 @@
 package Models;
 
+import codedraw.CodeDraw;
+
 public class Body {
     private double mass;
     private Vector3 position;
@@ -32,5 +34,9 @@ public class Body {
         Vector3 newVelocity = newPosition.subtract(position);
         position = newPosition;
         velocity = newVelocity;
+    }
+    public void draw(CodeDraw cd) {
+        cd.setColor(SpaceDraw.massToColor(this.mass));
+        position.drawAsFilledCircle(cd, SpaceDraw.massToRadius(this.mass));
     }
 }
