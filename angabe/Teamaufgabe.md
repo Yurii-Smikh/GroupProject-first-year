@@ -29,10 +29,10 @@ berechnen zu können:
 ```
   // for each body (with index i): compute the total force exerted on it.
   for (int i = 0; i < bodies.length; i++) {
-      forceOnBody[i] = new Simulation.Vector3(); // begin with zero
+      forceOnBody[i] = new Models.Vector3(); // begin with zero
       for (int j = 0; j < bodies.length; j++) {
           if (i != j) {
-              Simulation.Vector3 forceToAdd = gravitationalForce(bodies[i], bodies[j]);
+              Models.Vector3 forceToAdd = gravitationalForce(bodies[i], bodies[j]);
               forceOnBody[i] = plus(forceOnBody[i], forceToAdd);
           }
       }
@@ -73,15 +73,15 @@ Um die Gruppe zusammenzufassen, muss gelten d/r < T (siehe Abbildung 1).
 |------------------------------------|
 | *Abbildung 1: Wenn ein einzelner Himmelskörper von einer Gruppe von Himmelskörpern weit genug entfernt ist, kann die Kraft, die von der Gruppe auf den einzelnen Himmelskörper wirkt, schneller berechnet werden. Gruppen entsprechen Teilbäumen, das heißt, (Unter-) Quadranten mit Seitenlänge d. Die Genauigkeit der Näherung ist ausreichend, falls d/r < T, wobei r die Distanz vom  Himmelskörper zum Mittelpunkt des Quadranten und T ein spezifizierter Schwellwert ist, mit dem die Genauigkeit der Simulation.Simulation eingestellt werden kann. In der Literatur wird häufig T = 1 gesetzt.*|
 
- ## Datenstruktur: Octree.BodyOctree
+ ## Datenstruktur: Octree.Octree
 
 Wie werden nun die Gruppen gefunden, die man zusammenfassen kann? Eine geeignete
-Datenstruktur ist der Quadtree in 2D bzw. der Octree.BodyOctree in 3D. Wir werden die Konzepte
-anhand des Quadtrees darstellen, in Ihrer Lösung sollen Sie dann aber einen Octree.BodyOctree
+Datenstruktur ist der Quadtree in 2D bzw. der Octree.Octree in 3D. Wir werden die Konzepte
+anhand des Quadtrees darstellen, in Ihrer Lösung sollen Sie dann aber einen Octree.Octree
 verwenden, da die Himmelskörper im 3D-Raum liegen:
 
 1. Der erste Schritt ist, alle Himmelskörper der Simulation.Simulation in eine Baumstruktur
-   (den Quadtree bzw. Octree.BodyOctree) einzufügen. Das Einfügen geschieht rekursiv: Ist
+   (den Quadtree bzw. Octree.Octree) einzufügen. Das Einfügen geschieht rekursiv: Ist
    ein Knoten leer (`null`), wird der Himmelskörper eingefügt und es entsteht dabei ein
    Blattknoten, der genau einen Himmelskörper enthält. Ist der Knoten, in den eingefügt
    wird, ein Blattknoten mit genau einem Himmelskörper, wird der Blattknoten in vier -
@@ -126,7 +126,7 @@ Insbesondere das Kapitel 3 des Skriptums ist für die Erstellung der Lösung
 hilfreich.
 
 Sie können die Form der grafischen Darstellung selbst auswählen. Der dargestellte
-Ausschnitt sollte die gesamte Region, die vom Octree.BodyOctree abgedeckt wird, darstellen.
+Ausschnitt sollte die gesamte Region, die vom Octree.Octree abgedeckt wird, darstellen.
 Sie können eine Projektionsrichtung für die Visualisierung wählen (z.B. wie bisher
 Projektionen auf die x-y-Ebene).
 
@@ -159,9 +159,9 @@ im Lauf der Zeit.
 
 ### Behandlung von Kollisionen (freiwillig)
 
-Sie können Ihren Octree.BodyOctree so erweiteren, dass beim Einfügen eines Himmelskörpers überprüft wird, ob
+Sie können Ihren Octree.Octree so erweiteren, dass beim Einfügen eines Himmelskörpers überprüft wird, ob
 es dabei zu Kollisionen kommt. Falls das so ist, sollten die entsprechenden Himmelskörper gleich
-verschmolzen werden. Dabei sollte der Octree.BodyOctree ausgenutzt werden, sodass möglichst wenige
+verschmolzen werden. Dabei sollte der Octree.Octree ausgenutzt werden, sodass möglichst wenige
 Kollisionsüberprüfungen durchgeführt werden und das Einfügen effizient bleibt.
 
 Dazu überprüft man beim Einfügen nur jene Knoten, die sich mit dem einzufügenden Himmelskörper
@@ -180,8 +180,8 @@ Himmelskörper, den man einfügt, durch.
  ##  Punkteaufteilung
   <a name="punkteaufteilung"> </a>
 
-- Aufbau Octree.BodyOctree: 8 Punkte
-- Berechnung wechselseitiger Schwerkraft im Octree.BodyOctree : 9 Punkte
+- Aufbau Octree.Octree: 8 Punkte
+- Berechnung wechselseitiger Schwerkraft im Octree.Octree : 9 Punkte
 - Simulation.Simulation mit grafischer Ausgabe: 6 Punkte
 
 **Gesamt: 23 Punkte**

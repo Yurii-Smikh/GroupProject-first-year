@@ -1,4 +1,4 @@
-package Simulation;
+package Models;
 
 public class Body {
     private double mass;
