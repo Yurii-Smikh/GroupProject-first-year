@@ -25,7 +25,8 @@ public class CodeDrawOctreeDrawer implements IOctreeDrawer {
 
     @Override
     public void drawBodyNode(BodyNode node) {
-        Color color = Color.getHSBColor((float)Math.random()*0.5f + 0.25f, (float)Math.random()*0.5f + 0.25f, (float)Math.random()*0.5f + 0.25f);
+        double mass = node.getBody().getMass();
+        Color color = Color.getHSBColor((float) mass/7, (float) mass/7, (float) mass/7);
         codeDraw.setColor(color);
         drawBody(node.getBody());
         if(drawSquares) drawSquare(node);
@@ -43,10 +44,8 @@ public class CodeDrawOctreeDrawer implements IOctreeDrawer {
 
     private void drawSquare(BodyNode node){
         //TODO
-        Vector3 position = node.getPosition();//.add(new Vector3(canvasSize, canvasSize, 0)).multiply(0.5); // offsetting the location to the centre of canvas
-
+        Vector3 position = node.getPosition().multiply(2);
+        position = position.add(new Vector3(canvasSize, canvasSize, 0)).multiply(0.5); // offsetting the location to the centre of canvas
         codeDraw.drawSquare(position.getX(), position.getY(), node.getSize());
-
-        System.out.println(node.getPosition().getX() + " | " + node.getPosition().getY() + " | " + node.getSize());
     }
 }

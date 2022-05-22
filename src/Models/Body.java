@@ -13,11 +13,10 @@ public class Body {
         this.velocity = velocity;
     }
 
-    public static Body getRandom(double medianSimMasss, double simulationSize, double medianSpeed){
-        double mass = Math.abs(Math.random()) * medianSimMasss;
-        Vector3 position = new Vector3( (Math.random()* 2 - 1) * simulationSize/2, (Math.random()* 2 - 1) * simulationSize/2,  0);
-//        Vector3 velocity = new Vector3(0 + Math.random()) * approximateVelocity, 0 + Math.random() * approximateVelocity, 0 + Math.random() * approximateVelocity);
-        Vector3 velocity = new Vector3();
+    public static Body getRandom(double medianSimMass, double simulationSize, double medianSpeed){
+        double mass = Math.abs(Math.random()) * medianSimMass;
+        Vector3 position = new Vector3( (Math.random()* 2 - 1) * simulationSize/2, (Math.random()* 2 - 1) * simulationSize/2,  (Math.random()* 2 - 1) * simulationSize/2);
+        Vector3 velocity = new Vector3(Math.random() * medianSpeed, Math.random() * medianSpeed, Math.random() * medianSpeed);
         return new Body(mass, position, velocity);
     }
 

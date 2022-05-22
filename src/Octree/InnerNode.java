@@ -16,17 +16,16 @@ public class InnerNode extends OctreeNode {
     // RightBotFront [1][0][0]
     // RightBotBack [1][0][1]
 
-    public InnerNode(BodyNode previoisNodeFromWichToCreate, Body body){
-        this.position = previoisNodeFromWichToCreate.getPosition();
-        this.size = previoisNodeFromWichToCreate.getSize();
+    public InnerNode(BodyNode previousNodeFromWhichToCreate, Body body){
+        this.position = previousNodeFromWhichToCreate.getPosition();
+        this.size = previousNodeFromWhichToCreate.getSize();
 
+        massCenter = new Vector3();
         leafNodes = new OctreeNode[2][2][2];
-
         double newSize = size * 0.5;
         fillWithBlanks(newSize);
-
         add(body);
-        add(previoisNodeFromWichToCreate.getBody());
+        add(previousNodeFromWhichToCreate.getBody());
     }
 
     private IntVector pickNodefor(Body body) {
@@ -55,6 +54,7 @@ public class InnerNode extends OctreeNode {
         leafNodes[1][0][0] = new BlankNode(new Vector3(position.getX() + newSize, position.getY() - newSize, position.getZ() + newSize),newSize);
         leafNodes[1][0][1] = new BlankNode(new Vector3(position.getX() + newSize, position.getY() - newSize, position.getZ() - newSize),newSize);
     }
+
     @Override
     public int bodyCount() {
         int sum = 0;
@@ -73,6 +73,8 @@ public class InnerNode extends OctreeNode {
     public OctreeNode add(Body body){
         IntVector choice = pickNodefor(body);
         leafNodes[choice.getX()][choice.getY()][choice.getZ()] = leafNodes[choice.getX()][choice.getY()][choice.getZ()].add(body);
+        totalMass += body.getMass();
+        massCenter = massCenter.add(body.getPosition().multiply(body.getMass()/totalMass));
         return this;
     }
 

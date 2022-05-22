@@ -10,6 +10,8 @@ public class BodyNode extends OctreeNode {
         this.body = body;
         this.position = position;
         this.size = size;
+        this.massCenter = body.getPosition();
+        this.totalMass = body.getMass();
     }
     public Body getBody() {
         return body;
