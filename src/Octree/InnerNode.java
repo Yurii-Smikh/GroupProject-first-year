@@ -1,7 +1,6 @@
 package Octree;
 
 import Models.*;
-import codedraw.*;
 
 public class InnerNode extends OctreeNode {
     private OctreeNode[][][] leafNodes;
@@ -71,11 +70,11 @@ public class InnerNode extends OctreeNode {
     }
 
     @Override
-    public void draw(CodeDraw cd) {
+    public void draw(IOctreeDrawer drawer) {
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 2; j++) {
                 for (int k = 0; k < 2; k++) {
-                    leafNodes[i][j][k].draw(cd);
+                    leafNodes[i][j][k].draw(drawer);
                 }
             }
         }

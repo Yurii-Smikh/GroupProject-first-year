@@ -1,15 +1,24 @@
 package Models;
 
-import codedraw.CodeDraw;
+import java.util.Random;
+
 public class Body {
     private double mass;
     private Vector3 position;
     private Vector3 velocity;
 
-    public Body(double mass, Vector3 location, Vector3 movement){
+    public Body(double mass, Vector3 position, Vector3 velocity){
         this.mass = mass;
-        this.position = location;
-        this.velocity = movement;
+        this.position = position;
+        this.velocity = velocity;
+    }
+
+    //good values: size{4 * 1.989e30}, velocity{5e3}
+    public static Body getRandom(Random random, double approximateSize, double approximateVelocity){
+        double size = Math.abs(random.nextGaussian()) * approximateSize;
+        Vector3 position = new Vector3(1.5 * random.nextGaussian() * Constants.AU, 1.5 * random.nextGaussian() * Constants.AU, 1.5 * random.nextGaussian() * Constants.AU);
+        Vector3 velocity = new Vector3(0 + random.nextGaussian() * approximateVelocity, 0 + random.nextGaussian() * approximateVelocity, 0 + random.nextGaussian() * approximateVelocity);
+        return new Body(size, position, velocity);
     }
 
     public double getMass() {
@@ -33,9 +42,5 @@ public class Body {
         Vector3 newVelocity = newPosition.subtract(position);
         position = newPosition;
         velocity = newVelocity;
-    }
-    public void draw(CodeDraw cd) {
-        cd.setColor(SpaceDraw.massToColor(this.mass));
-        position.drawAsFilledCircle(cd, SpaceDraw.massToRadius(this.mass));
     }
 }

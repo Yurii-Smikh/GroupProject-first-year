@@ -2,7 +2,6 @@ package Octree;
 
 import Models.Body;
 import Models.Vector3;
-import codedraw.*;
 
 public class BlankNode extends OctreeNode {
     public BlankNode(Vector3 position, double size){
@@ -21,5 +20,5 @@ public class BlankNode extends OctreeNode {
     }
 
     @Override
-    public void draw(CodeDraw cd) {}
+    public void draw(IOctreeDrawer drawer) {}
 }

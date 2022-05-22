@@ -2,7 +2,6 @@ package Octree;
 
 import Models.Body;
 import Models.Vector3;
-import codedraw.CodeDraw;
 
 public class BodyNode extends OctreeNode {
     private Body body;
@@ -27,7 +26,7 @@ public class BodyNode extends OctreeNode {
     }
 
     @Override
-    public void draw(CodeDraw cd) {
-        body.draw(cd);
+    public void draw(IOctreeDrawer drawer) {
+        drawer.drawBodyNode(this);
     }
 }

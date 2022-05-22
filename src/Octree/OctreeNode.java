@@ -29,7 +29,7 @@ public abstract class OctreeNode {
     public abstract int bodyCount();
     public abstract OctreeNode add(Body body);
 
-    public abstract void draw(CodeDraw cd);
+    public abstract void draw(IOctreeDrawer drawer);
 }
 
 
