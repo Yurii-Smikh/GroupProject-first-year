@@ -5,19 +5,18 @@ import Models.Vector3;
 import Octree.BodyNode;
 import Octree.IOctreeDrawer;
 import codedraw.CodeDraw;
-import codedraw.Corner;
 
 import java.awt.*;
 
 public class CodeDrawOctreeDrawer implements IOctreeDrawer {
-    private int fieldSize;
+    private int canvasSize;
     private CodeDraw codeDraw;
     private boolean drawSquares;
     private double scale;
 
-    public CodeDrawOctreeDrawer(int fieldSize, boolean drawSquares, double scale){
-        this.fieldSize = fieldSize;
-        this.codeDraw = new CodeDraw(fieldSize, fieldSize);
+    public CodeDrawOctreeDrawer(int canvasSize, boolean drawSquares, double scale){
+        this.canvasSize = canvasSize;
+        this.codeDraw = new CodeDraw(canvasSize, canvasSize);
         this.drawSquares = drawSquares;
         this.scale = scale;
     }
@@ -29,6 +28,8 @@ public class CodeDrawOctreeDrawer implements IOctreeDrawer {
 
     @Override
     public void drawBodyNode(BodyNode node) {
+        Color color = Color.getHSBColor((float)Math.random()*0.5f + 0.25f, (float)Math.random()*0.5f + 0.25f, (float)Math.random()*0.5f + 0.25f);
+        codeDraw.setColor(color);
         drawBody(node.getBody());
         if(drawSquares) drawSquare(node);
     }
@@ -39,15 +40,16 @@ public class CodeDrawOctreeDrawer implements IOctreeDrawer {
     }
 
     private void drawBody(Body body){
-        codeDraw.setColor(Color.LIGHT_GRAY);
-        Vector3 position = body.getPosition().multiply(1/scale).multiply(fieldSize);
-        position = position.add(position.multiply(0.5));
-        codeDraw.fillCircle(position.getX(), position.getY(), 50);
+        Vector3 position = body.getPosition().add(new Vector3(canvasSize, canvasSize, 0).multiply(0.5));  // offsetting the location to the centre of canvas
+        codeDraw.fillCircle(position.getX(), position.getY(), 1);
     }
 
     private void drawSquare(BodyNode node){
-        codeDraw.setColor(Color.LIGHT_GRAY);
-        Vector3 position = node.getPosition().add(new Vector3(fieldSize/2, fieldSize/2, 0));
-        codeDraw.drawSquare(position.multiply(0.5).getX(), position.multiply(0.5).getY(), node.getSize());
+        //TODO
+        Vector3 position = node.getPosition();//.add(new Vector3(canvasSize, canvasSize, 0)).multiply(0.5); // offsetting the location to the centre of canvas
+
+        codeDraw.drawSquare(position.getX(), position.getY(), node.getSize());
+
+        System.out.println(node.getPosition().getX() + " | " + node.getPosition().getY() + " | " + node.getSize());
     }
 }

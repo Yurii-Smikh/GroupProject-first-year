@@ -7,6 +7,4 @@ public class Constants {
 
     public static final double LY = 9.461e15; // meters
 
-    public static final double SECTION_SIZE = 10 * AU;
-
 }

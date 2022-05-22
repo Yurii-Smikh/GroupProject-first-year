@@ -54,13 +54,4 @@ public class Vector3 {
     public double distanceTo(Vector3 point) {
         return Math.sqrt((Math.pow((x - point.x),2))+(Math.pow((y - point.y),2))+(Math.pow((z - point.z),2)));
     }
-
-    public double AU = 150e9;
-    public double SECTION_SIZE = 10 * AU;
-    public void drawAsFilledCircle(CodeDraw cd, double radius) {
-        double x = cd.getWidth() * (this.x + SECTION_SIZE / 2) / SECTION_SIZE;
-        double y = cd.getWidth() * (this.y + SECTION_SIZE / 2) / SECTION_SIZE;
-        radius = cd.getWidth() * radius / SECTION_SIZE;
-        cd.fillCircle(x, y, Math.max(radius, 1.5));
-    }
 }

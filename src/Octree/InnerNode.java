@@ -30,16 +30,16 @@ public class InnerNode extends OctreeNode {
     }
 
     private IntVector pickNodefor(Body body) {
-        Vector3 pos = body.getPosition();
+        Vector3 position = body.getPosition();
         IntVector indices = new IntVector(0, 0, 0);
 
-        if (pos.getX() >= position.getX()) { // right
+        if (position.getX() >= this.position.getX()) { // right
             indices.setX(1);
         }
-        if (pos.getY() >= position.getY()) { // top
+        if (position.getY() >= this.position.getY()) { // top
             indices.setY(1);
         }
-        if (pos.getZ() >= position.getZ()){ // back
+        if (position.getZ() >= this.position.getZ()){ // back
             indices.setZ(1);
         }
         return indices;
