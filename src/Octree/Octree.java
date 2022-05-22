@@ -17,4 +17,12 @@ public class Octree {
     public void draw(IOctreeDrawer drawer){
         root.draw(drawer);
     }
+
+    public static Octree fromBodies(Body[] bodies, int size){
+        Octree tree = new Octree(size);
+        for (Body body : bodies) {
+            tree.add(body);
+        }
+        return tree;
+    }
 }
