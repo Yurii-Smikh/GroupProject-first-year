@@ -40,12 +40,14 @@ public class CodeDrawOctreeDrawer implements IOctreeDrawer {
 
     private void drawBody(Body body){
         codeDraw.setColor(Color.LIGHT_GRAY);
-        Vector3 position = body.getPosition().multiply(1/scale);
-        codeDraw.fillCircle(position.getX(), position.getY(), 5);
+        Vector3 position = body.getPosition().multiply(1/scale).multiply(fieldSize);
+        position = position.add(position.multiply(0.5));
+        codeDraw.fillCircle(position.getX(), position.getY(), 50);
     }
 
     private void drawSquare(BodyNode node){
         codeDraw.setColor(Color.LIGHT_GRAY);
-        codeDraw.drawSquare(node.getPosition().getX(), node.getPosition().getY(), node.getSize());
+        Vector3 position = node.getPosition().add(new Vector3(fieldSize/2, fieldSize/2, 0));
+        codeDraw.drawSquare(position.multiply(0.5).getX(), position.multiply(0.5).getY(), node.getSize());
     }
 }
