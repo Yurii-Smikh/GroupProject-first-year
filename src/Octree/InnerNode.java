@@ -58,7 +58,14 @@ public class InnerNode extends OctreeNode {
     @Override
     public int bodyCount() {
         int sum = 0;
-        //TODO
+
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                for (int k = 0; k < 2; k++) {
+                    sum += leafNodes[i][j][k].bodyCount();
+                }
+            }
+        }
         return sum;
     }
 
