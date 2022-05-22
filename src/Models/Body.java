@@ -13,7 +13,6 @@ public class Body {
         this.velocity = velocity;
     }
 
-    //good values: size{4 * 1.989e30}, velocity{5e3}
     public static Body getRandom(Random random, double approximateMass, double simulationSize, double approximateVelocity){
         double mass = Math.abs(Math.random()) * approximateMass;
         Vector3 position = new Vector3( (Math.random()* 2 - 1) * simulationSize/2, (Math.random()* 2 - 1) * simulationSize/2,  0);

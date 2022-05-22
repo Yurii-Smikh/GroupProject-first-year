@@ -12,13 +12,10 @@ public class CodeDrawOctreeDrawer implements IOctreeDrawer {
     private int canvasSize;
     private CodeDraw codeDraw;
     private boolean drawSquares;
-    private double scale;
-
-    public CodeDrawOctreeDrawer(int canvasSize, boolean drawSquares, double scale){
+    public CodeDrawOctreeDrawer(int canvasSize, boolean drawSquares){
         this.canvasSize = canvasSize;
         this.codeDraw = new CodeDraw(canvasSize, canvasSize);
         this.drawSquares = drawSquares;
-        this.scale = scale;
     }
 
     @Override
