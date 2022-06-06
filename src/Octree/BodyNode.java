@@ -1,6 +1,7 @@
 package Octree;
 
 import Models.Body;
+import Models.Constants;
 import Models.Vector3;
 
 public class BodyNode extends OctreeNode {
@@ -13,8 +14,16 @@ public class BodyNode extends OctreeNode {
         this.massCenter = body.getPosition();
         this.totalMass = body.getMass();
     }
+
     public Body getBody() {
         return body;
+    }
+
+    @Override
+    public Vector3 getForceExertedAt(Body target, double t) {
+        if(body == target) return new Vector3();
+        Vector3 massCenterToTarget = target.getPosition().subtract(massCenter).getNormal().multiply(-1d);
+        return massCenterToTarget.multiply((target.getMass() * totalMass) * Constants.G / Math.pow((massCenterToTarget.length()), 2));
     }
 
     @Override

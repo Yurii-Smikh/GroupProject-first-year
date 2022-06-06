@@ -54,4 +54,10 @@ public class Vector3 {
     public double distanceTo(Vector3 point) {
         return Math.sqrt((Math.pow((x - point.x),2))+(Math.pow((y - point.y),2))+(Math.pow((z - point.z),2)));
     }
+
+    public void clamp(double min, double max){
+        x = Math.max(Math.min(x, max), min);
+        y = Math.max(Math.min(y, max), min);
+        z = Math.max(Math.min(z, max), min);
+    }
 }

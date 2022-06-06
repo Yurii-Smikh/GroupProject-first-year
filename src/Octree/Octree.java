@@ -10,6 +10,10 @@ public class Octree {
         root = new BlankNode(new Vector3(0,0,0), size);
     }
 
+    public Vector3 getForceExertedAt(Body target, double t){
+        return root.getForceExertedAt(target, t);
+    }
+
     public void add(Body body){
         root = root.add(body);
     }

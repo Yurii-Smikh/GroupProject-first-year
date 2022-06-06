@@ -23,6 +23,8 @@ public abstract class OctreeNode {
         return position;
     }
 
+    public abstract Vector3 getForceExertedAt(Body target, double t);
+
     public double getSize() {
         return size;
     }

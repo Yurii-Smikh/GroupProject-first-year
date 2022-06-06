@@ -1,16 +1,16 @@
 package Models;
 
-import java.util.Random;
-
 public class Body {
     private double mass;
     private Vector3 position;
     private Vector3 velocity;
+    private Vector3 forceExertedOn;
 
     public Body(double mass, Vector3 position, Vector3 velocity){
         this.mass = mass;
         this.position = position;
         this.velocity = velocity;
+        forceExertedOn = new Vector3();
     }
 
     public static Body getRandom(double medianSimMass, double simulationSize, double medianSpeed){
@@ -28,7 +28,7 @@ public class Body {
         return position;
     }
 
-    public Vector3 getMovementVector() {
+    public Vector3 getVelocity() {
         return velocity;
     }
 
@@ -36,10 +36,13 @@ public class Body {
         return position.distanceTo(body.position);
     }
 
-    public void move(Vector3 force){   // F = m*a => a = F/m
-        Vector3 newPosition = velocity.add(position.add(force.multiply(1d / mass)));
-        Vector3 newVelocity = newPosition.subtract(position);
-        position = newPosition;
-        velocity = newVelocity;
+    public void addForce(Vector3 force){
+        forceExertedOn = forceExertedOn.add(force);
+    }
+
+    public void applyForces(){
+        velocity = velocity.add(forceExertedOn.multiply(1d / mass));
+        position = position.add(velocity);
+        forceExertedOn = new Vector3();
     }
 }

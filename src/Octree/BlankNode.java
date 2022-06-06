@@ -10,6 +10,11 @@ public class BlankNode extends OctreeNode {
     }
 
     @Override
+    public Vector3 getForceExertedAt(Body target, double t) {
+        return new Vector3();
+    }
+
+    @Override
     public int bodyCount() {
         return 0;
     }
