@@ -40,4 +40,9 @@ public class BodyNode extends OctreeNode {
     public void draw(IOctreeDrawer drawer) {
         drawer.drawBodyNode(this);
     }
+
+    @Override
+    public int getNodeEmpty() {
+        return 1;
+    }
 }

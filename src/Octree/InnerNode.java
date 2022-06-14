@@ -105,4 +105,17 @@ public class InnerNode extends OctreeNode {
             }
         }
     }
+
+    @Override
+    public int getNodeEmpty() {
+        int sum = 0;
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                for (int k = 0; k < 2; k++) {
+                    sum += leafNodes[i][j][k].getNodeEmpty();
+                }
+            }
+        }
+        return sum;
+    }
 }

@@ -26,4 +26,9 @@ public class BlankNode extends OctreeNode {
 
     @Override
     public void draw(IOctreeDrawer drawer) {}
+
+    @Override
+    public int getNodeEmpty() {
+        return 0;
+    }
 }

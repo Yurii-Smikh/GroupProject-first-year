@@ -32,6 +32,8 @@ public abstract class OctreeNode {
     public abstract OctreeNode add(Body body);
 
     public abstract void draw(IOctreeDrawer drawer);
+
+    public abstract int getNodeEmpty();
 }
 
 

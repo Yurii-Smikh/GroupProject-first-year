@@ -29,4 +29,7 @@ public class Octree {
         }
         return tree;
     }
+    public int getNonEmptyNodes(){
+        return root.getNodeEmpty();
+    }
 }

@@ -7,7 +7,7 @@ import Output.CodeDrawOctreeDrawer;
 import java.util.Random;
 
 public class Simulation {
-    private static final int NUMBER_OF_BODIES = 1000;
+    private static final int NUMBER_OF_BODIES = 500;
     private static final double AVERAGE_BODY_MASS = 10; // kilograms (some Big number)
     private static final int CANVAS_SIZE = 512;  // size of the Canvas(window)
     private static final boolean DRAW_SQUARES = false;
@@ -33,6 +33,7 @@ public class Simulation {
                 drawer.clean();
                 iterationTree.draw(drawer);
                 drawer.display();
+                System.out.println(iterationTree.getNonEmptyNodes());
             }
         }
     }
